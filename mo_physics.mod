@@ -1,0 +1,298 @@
+G95 module created on Thu Feb 12 14:13:45 2015 from greb.model.f90
+If you edit this, you'll get what you deserve.
+module-version 9
+(() () () () () () () () () () () () () () () () () () () () ())
+
+()
+
+()
+
+()
+
+()
+
+(2 'a_cloud' 'mo_physics' 1 ((PARAMETER UNKNOWN UNKNOWN UNKNOWN NONE
+NONE) (REAL 4) 0 0 () (CONSTANT (REAL 4) 0 '11744051' 0 125) () () '' ()
+())
+3 'a_no_ice' 'mo_physics' 1 ((PARAMETER UNKNOWN UNKNOWN UNKNOWN NONE
+NONE) (REAL 4) 0 0 () (CONSTANT (REAL 4) 0 '13421773' 0 123) () () '' ()
+())
+4 'cap_air' 'mo_physics' 1 ((PARAMETER UNKNOWN UNKNOWN UNKNOWN NONE NONE)
+(REAL 4) 0 0 () (CONSTANT (REAL 4) 0 '12060000' 0 149) () () '' () ())
+5 'cap_land' 'mo_physics' 1 ((PARAMETER UNKNOWN UNKNOWN UNKNOWN NONE
+NONE) (REAL 4) 0 0 () (CONSTANT (REAL 4) 0 '9674311' 0 149) () () '' ()
+())
+6 'cap_ocean' 'mo_physics' 1 ((PARAMETER UNKNOWN UNKNOWN UNKNOWN NONE
+NONE) (REAL 4) 0 0 () (CONSTANT (REAL 4) 0 '16728930' 0 148) () () '' ()
+())
+7 'cap_surf' 'mo_physics' 1 ((VARIABLE UNKNOWN UNKNOWN UNKNOWN NONE NONE
+DIMENSION) (REAL 4) 0 0 () (2 EXPLICIT (CONSTANT (INTEGER 4) 0 '1') (
+CONSTANT (INTEGER 4) 0 '96') (CONSTANT (INTEGER 4) 0 '1') (CONSTANT (
+INTEGER 4) 0 '48')) () '' () ())
+8 'ce' 'mo_physics' 1 ((PARAMETER UNKNOWN UNKNOWN UNKNOWN NONE NONE) (
+REAL 4) 0 0 () (CONSTANT (REAL 4) 0 '8589935' 0 118) () () '' () ())
+9 'cldclim' 'mo_physics' 1 ((VARIABLE UNKNOWN UNKNOWN UNKNOWN NONE NONE
+DIMENSION) (REAL 4) 0 0 () (3 EXPLICIT (CONSTANT (INTEGER 4) 0 '1') (
+CONSTANT (INTEGER 4) 0 '96') (CONSTANT (INTEGER 4) 0 '1') (CONSTANT (
+INTEGER 4) 0 '48') (CONSTANT (INTEGER 4) 0 '1') (CONSTANT (INTEGER 4) 0
+'730')) () '' () ())
+10 'co_turb' 'mo_physics' 1 ((PARAMETER UNKNOWN UNKNOWN UNKNOWN NONE
+NONE) (REAL 4) 0 0 () (CONSTANT (REAL 4) 0 '10485760' 0 129) () () '' ()
+())
+11 'cp_air' 'mo_physics' 1 ((PARAMETER UNKNOWN UNKNOWN UNKNOWN NONE NONE)
+(REAL 4) 0 0 () (CONSTANT (REAL 4) 0 '16465920' 0 136) () () '' () ())
+12 'cp_land' 'mo_physics' 1 ((PARAMETER UNKNOWN UNKNOWN UNKNOWN NONE
+NONE) (REAL 4) 0 0 () (CONSTANT (REAL 4) 0 '15240761' 0 136) () () '' ()
+())
+13 'cp_ocean' 'mo_physics' 1 ((PARAMETER UNKNOWN UNKNOWN UNKNOWN NONE
+NONE) (REAL 4) 0 0 () (CONSTANT (REAL 4) 0 '8572928' 0 139) () () '' ()
+())
+14 'cq_latent' 'mo_physics' 1 ((PARAMETER UNKNOWN UNKNOWN UNKNOWN NONE
+NONE) (REAL 4) 0 0 () (CONSTANT (REAL 4) 0 '9028000' 0 148) () () '' ()
+())
+15 'cq_rain' 'mo_physics' 1 ((PARAMETER UNKNOWN UNKNOWN UNKNOWN NONE
+NONE) (REAL 4) 0 0 () (CONSTANT (REAL 4) 0 '10180664' 1 107) () () '' ()
+())
+16 'ct_sens' 'mo_physics' 1 ((PARAMETER UNKNOWN UNKNOWN UNKNOWN NONE
+NONE) (REAL 4) 0 0 () (CONSTANT (REAL 4) 0 '11796480' 0 131) () () '' ()
+())
+17 'd_air' 'mo_physics' 1 ((PARAMETER UNKNOWN UNKNOWN UNKNOWN NONE NONE)
+(REAL 4) 0 0 () (CONSTANT (REAL 4) 0 '10240000' 0 139) () () '' () ())
+18 'd_land' 'mo_physics' 1 ((PARAMETER UNKNOWN UNKNOWN UNKNOWN NONE NONE)
+(REAL 4) 0 0 () (CONSTANT (REAL 4) 0 '8388608' 0 128) () () '' () ())
+19 'd_ocean' 'mo_physics' 1 ((PARAMETER UNKNOWN UNKNOWN UNKNOWN NONE
+NONE) (REAL 4) 0 0 () (CONSTANT (REAL 4) 0 '13107200' 0 132) () () '' ()
+())
+20 'da_ice' 'mo_physics' 1 ((PARAMETER UNKNOWN UNKNOWN UNKNOWN NONE NONE)
+(REAL 4) 0 0 () (CONSTANT (REAL 4) 0 '8388608' 0 125) () () '' () ())
+21 'dlat' 'mo_numerics' 1 ((PARAMETER UNKNOWN UNKNOWN UNKNOWN NONE NONE)
+(REAL 4) 0 0 () (CONSTANT (REAL 4) 0 '15728640' 0 128) () () '' () ())
+22 'dlon' 'mo_numerics' 1 ((PARAMETER UNKNOWN UNKNOWN UNKNOWN NONE NONE)
+(REAL 4) 0 0 () (CONSTANT (REAL 4) 0 '15728640' 0 128) () () '' () ())
+23 'dt' 'mo_numerics' 1 ((PARAMETER UNKNOWN UNKNOWN UNKNOWN NONE NONE) (
+INTEGER 4) 0 0 () (CONSTANT (INTEGER 4) 0 '43200') () () '' () ())
+24 'dt_crcl' 'mo_numerics' 1 ((PARAMETER UNKNOWN UNKNOWN UNKNOWN NONE
+NONE) (INTEGER 4) 0 0 () (CONSTANT (INTEGER 4) 0 '1800') () () '' () ())
+25 'dtrad' 'mo_physics' 1 ((VARIABLE UNKNOWN UNKNOWN UNKNOWN NONE NONE
+DIMENSION) (REAL 4) 0 0 () (3 EXPLICIT (CONSTANT (INTEGER 4) 0 '1') (
+CONSTANT (INTEGER 4) 0 '96') (CONSTANT (INTEGER 4) 0 '1') (CONSTANT (
+INTEGER 4) 0 '48') (CONSTANT (INTEGER 4) 0 '1') (CONSTANT (INTEGER 4) 0
+'730')) () '' () ())
+26 'eps' 'mo_physics' 1 ((PARAMETER UNKNOWN UNKNOWN UNKNOWN NONE NONE) (
+REAL 4) 0 0 () (CONSTANT (REAL 4) 0 '8388608' 0 127) () () '' () ())
+27 'glacier' 'mo_physics' 1 ((VARIABLE UNKNOWN UNKNOWN UNKNOWN NONE NONE
+DIMENSION) (REAL 4) 0 0 () (2 EXPLICIT (CONSTANT (INTEGER 4) 0 '1') (
+CONSTANT (INTEGER 4) 0 '96') (CONSTANT (INTEGER 4) 0 '1') (CONSTANT (
+INTEGER 4) 0 '48')) () '' () ())
+28 'ipx' 'mo_numerics' 1 ((VARIABLE UNKNOWN UNKNOWN UNKNOWN NONE NONE) (
+INTEGER 4) 0 0 () () () '' () ())
+29 'ipy' 'mo_numerics' 1 ((VARIABLE UNKNOWN UNKNOWN UNKNOWN NONE NONE) (
+INTEGER 4) 0 0 () () () '' () ())
+30 'ireal' 'mo_numerics' 1 ((VARIABLE UNKNOWN UNKNOWN UNKNOWN NONE NONE)
+(INTEGER 4) 0 0 () () () '' () ())
+31 'ityr' 'mo_physics' 1 ((VARIABLE UNKNOWN UNKNOWN UNKNOWN NONE NONE) (
+INTEGER 4) 0 0 () () () '' () ())
+32 'jday' 'mo_physics' 1 ((VARIABLE UNKNOWN UNKNOWN UNKNOWN NONE NONE) (
+INTEGER 4) 0 0 () () () '' () ())
+33 'jday_mon' 'mo_numerics' 1 ((PARAMETER UNKNOWN UNKNOWN UNKNOWN NONE
+NONE DIMENSION) (INTEGER 4) 0 0 () (ARRAY (INTEGER 4) 1 (((CONSTANT (
+INTEGER 4) 0 '31') ()) ((CONSTANT (INTEGER 4) 0 '28') ()) ((CONSTANT (
+INTEGER 4) 0 '31') ()) ((CONSTANT (INTEGER 4) 0 '30') ()) ((CONSTANT (
+INTEGER 4) 0 '31') ()) ((CONSTANT (INTEGER 4) 0 '30') ()) ((CONSTANT (
+INTEGER 4) 0 '31') ()) ((CONSTANT (INTEGER 4) 0 '31') ()) ((CONSTANT (
+INTEGER 4) 0 '30') ()) ((CONSTANT (INTEGER 4) 0 '31') ()) ((CONSTANT (
+INTEGER 4) 0 '30') ()) ((CONSTANT (INTEGER 4) 0 '31') ())) ()) (1
+EXPLICIT (CONSTANT (INTEGER 4) 0 '1') (CONSTANT (INTEGER 4) 0 '12')) () ''
+() ())
+34 'kappa' 'mo_physics' 1 ((PARAMETER UNKNOWN UNKNOWN UNKNOWN NONE NONE)
+(INTEGER 4) 0 0 () (CONSTANT (INTEGER 4) 0 '800000') () () '' () ())
+35 'log_exp' 'mo_physics' 1 ((VARIABLE UNKNOWN UNKNOWN UNKNOWN NONE NONE
+IN_NAMELIST) (INTEGER 4) 0 0 () () () '' () ())
+36 'mldclim' 'mo_physics' 1 ((VARIABLE UNKNOWN UNKNOWN UNKNOWN NONE NONE
+DIMENSION) (REAL 4) 0 0 () (3 EXPLICIT (CONSTANT (INTEGER 4) 0 '1') (
+CONSTANT (INTEGER 4) 0 '96') (CONSTANT (INTEGER 4) 0 '1') (CONSTANT (
+INTEGER 4) 0 '48') (CONSTANT (INTEGER 4) 0 '1') (CONSTANT (INTEGER 4) 0
+'730')) () '' () ())
+37 'mo_numerics' 'mo_numerics' 1 ((MODULE UNKNOWN UNKNOWN UNKNOWN NONE
+NONE) (UNKNOWN) 0 0 () () () '' () ())
+38 'mo_physics' 'mo_physics' 1 ((MODULE UNKNOWN UNKNOWN UNKNOWN NONE
+NONE) (UNKNOWN) 0 0 () () () '' () ())
+39 'ndays_yr' 'mo_numerics' 1 ((PARAMETER UNKNOWN UNKNOWN UNKNOWN NONE
+NONE) (INTEGER 4) 0 0 () (CONSTANT (INTEGER 4) 0 '365') () () '' () ())
+40 'ndt_days' 'mo_numerics' 1 ((PARAMETER UNKNOWN UNKNOWN UNKNOWN NONE
+NONE) (INTEGER 4) 0 0 () (CONSTANT (INTEGER 4) 0 '2') () () '' () ())
+41 'nstep_yr' 'mo_numerics' 1 ((PARAMETER UNKNOWN UNKNOWN UNKNOWN NONE
+NONE) (INTEGER 4) 0 0 () (CONSTANT (INTEGER 4) 0 '730') () () '' () ())
+42 'numerics' 'mo_numerics' 1 ((NAMELIST UNKNOWN UNKNOWN UNKNOWN NONE
+NONE) (UNKNOWN) 0 0 () () () '' () (43 'time_flux' 44 'time_ctrl' 45
+'time_scnr'))
+46 'p_emi' 'mo_physics' 1 ((PARAMETER UNKNOWN UNKNOWN UNKNOWN NONE NONE
+DIMENSION) (REAL 4) 0 0 () (ARRAY (REAL 4) 1 (((CONSTANT (REAL 4) 0
+'9512786' 0 130) ()) ((CONSTANT (REAL 4) 0 '13988685' 0 133) ()) ((
+CONSTANT (REAL 4) 0 '16136588' 0 132) ()) ((CONSTANT (REAL 4) 0 '9609989'
+0 121) ()) ((CONSTANT (REAL 4) 0 '12025908' 0 118) ()) ((CONSTANT (REAL
+4) 0 '15300821' 0 122) ()) ((CONSTANT (REAL 4) 0 '11616544' 0 125) ()) (
+(CONSTANT (REAL 4) 0 '9817188' 0 128) ()) ((CONSTANT (REAL 4) 0 '11797738'
+0 126) ()) ((CONSTANT (REAL 4) 0 '8943934' 0 127) ())) ()) (1 EXPLICIT (
+CONSTANT (INTEGER 4) 0 '1') (CONSTANT (INTEGER 4) 0 '10')) () '' () ())
+47 'physics' 'mo_physics' 1 ((NAMELIST UNKNOWN UNKNOWN UNKNOWN NONE NONE)
+(UNKNOWN) 0 0 () () () '' () (35 'log_exp'))
+48 'pi' 'mo_physics' 1 ((PARAMETER UNKNOWN UNKNOWN UNKNOWN NONE NONE) (
+REAL 4) 0 0 () (CONSTANT (REAL 4) 0 '13176825' 0 128) () () '' () ())
+49 'qclim' 'mo_physics' 1 ((VARIABLE UNKNOWN UNKNOWN UNKNOWN NONE NONE
+DIMENSION) (REAL 4) 0 0 () (3 EXPLICIT (CONSTANT (INTEGER 4) 0 '1') (
+CONSTANT (INTEGER 4) 0 '96') (CONSTANT (INTEGER 4) 0 '1') (CONSTANT (
+INTEGER 4) 0 '48') (CONSTANT (INTEGER 4) 0 '1') (CONSTANT (INTEGER 4) 0
+'730')) () '' () ())
+50 'qf_correct' 'mo_physics' 1 ((VARIABLE UNKNOWN UNKNOWN UNKNOWN NONE
+NONE DIMENSION) (REAL 4) 0 0 () (3 EXPLICIT (CONSTANT (INTEGER 4) 0 '1')
+(CONSTANT (INTEGER 4) 0 '96') (CONSTANT (INTEGER 4) 0 '1') (CONSTANT (
+INTEGER 4) 0 '48') (CONSTANT (INTEGER 4) 0 '1') (CONSTANT (INTEGER 4) 0
+'730')) () '' () ())
+51 'r_qviwv' 'mo_physics' 1 ((PARAMETER UNKNOWN UNKNOWN UNKNOWN NONE
+NONE) (REAL 4) 0 0 () (CONSTANT (REAL 4) 0 '10951066' 0 138) () () '' ()
+())
+52 'rho_air' 'mo_physics' 1 ((PARAMETER UNKNOWN UNKNOWN UNKNOWN NONE
+NONE) (REAL 4) 0 0 () (CONSTANT (REAL 4) 0 '10066330' 0 127) () () '' ()
+())
+53 'rho_land' 'mo_physics' 1 ((PARAMETER UNKNOWN UNKNOWN UNKNOWN NONE
+NONE) (REAL 4) 0 0 () (CONSTANT (REAL 4) 0 '10649600' 0 138) () () '' ()
+())
+54 'rho_ocean' 'mo_physics' 1 ((PARAMETER UNKNOWN UNKNOWN UNKNOWN NONE
+NONE) (REAL 4) 0 0 () (CONSTANT (REAL 4) 0 '16369254' 0 136) () () '' ()
+())
+55 'sig' 'mo_physics' 1 ((PARAMETER UNKNOWN UNKNOWN UNKNOWN NONE NONE) (
+REAL 4) 0 0 () (CONSTANT (REAL 4) 0 '15960757' 0 102) () () '' () ())
+56 'sw_solar' 'mo_physics' 1 ((VARIABLE UNKNOWN UNKNOWN UNKNOWN NONE
+NONE DIMENSION) (REAL 4) 0 0 () (2 EXPLICIT (CONSTANT (INTEGER 4) 0 '1')
+(CONSTANT (INTEGER 4) 0 '48') (CONSTANT (INTEGER 4) 0 '1') (CONSTANT (
+INTEGER 4) 0 '730')) () '' () ())
+57 'swetclim' 'mo_physics' 1 ((VARIABLE UNKNOWN UNKNOWN UNKNOWN NONE
+NONE DIMENSION) (REAL 4) 0 0 () (3 EXPLICIT (CONSTANT (INTEGER 4) 0 '1')
+(CONSTANT (INTEGER 4) 0 '96') (CONSTANT (INTEGER 4) 0 '1') (CONSTANT (
+INTEGER 4) 0 '48') (CONSTANT (INTEGER 4) 0 '1') (CONSTANT (INTEGER 4) 0
+'730')) () '' () ())
+58 't0' 'mo_physics' 1 ((VARIABLE UNKNOWN UNKNOWN UNKNOWN NONE NONE) (
+REAL 4) 0 0 () () () '' () ())
+59 't1' 'mo_physics' 1 ((VARIABLE UNKNOWN UNKNOWN UNKNOWN NONE NONE) (
+REAL 4) 0 0 () () () '' () ())
+60 't2' 'mo_physics' 1 ((VARIABLE UNKNOWN UNKNOWN UNKNOWN NONE NONE) (
+REAL 4) 0 0 () () () '' () ())
+61 'tclim' 'mo_physics' 1 ((VARIABLE UNKNOWN UNKNOWN UNKNOWN NONE NONE
+DIMENSION) (REAL 4) 0 0 () (3 EXPLICIT (CONSTANT (INTEGER 4) 0 '1') (
+CONSTANT (INTEGER 4) 0 '96') (CONSTANT (INTEGER 4) 0 '1') (CONSTANT (
+INTEGER 4) 0 '48') (CONSTANT (INTEGER 4) 0 '1') (CONSTANT (INTEGER 4) 0
+'730')) () '' () ())
+62 'tf_correct' 'mo_physics' 1 ((VARIABLE UNKNOWN UNKNOWN UNKNOWN NONE
+NONE DIMENSION) (REAL 4) 0 0 () (3 EXPLICIT (CONSTANT (INTEGER 4) 0 '1')
+(CONSTANT (INTEGER 4) 0 '96') (CONSTANT (INTEGER 4) 0 '1') (CONSTANT (
+INTEGER 4) 0 '48') (CONSTANT (INTEGER 4) 0 '1') (CONSTANT (INTEGER 4) 0
+'730')) () '' () ())
+44 'time_ctrl' 'mo_numerics' 1 ((VARIABLE UNKNOWN UNKNOWN UNKNOWN NONE
+NONE IN_NAMELIST) (INTEGER 4) 0 0 () () () '' () ())
+43 'time_flux' 'mo_numerics' 1 ((VARIABLE UNKNOWN UNKNOWN UNKNOWN NONE
+NONE IN_NAMELIST) (INTEGER 4) 0 0 () () () '' () ())
+45 'time_scnr' 'mo_numerics' 1 ((VARIABLE UNKNOWN UNKNOWN UNKNOWN NONE
+NONE IN_NAMELIST) (INTEGER 4) 0 0 () () () '' () ())
+63 'tl_ice1' 'mo_physics' 1 ((PARAMETER UNKNOWN UNKNOWN UNKNOWN NONE
+NONE) (REAL 4) 0 0 () (CONSTANT (REAL 4) 0 '8622899' 0 135) () () '' ()
+())
+64 'tl_ice2' 'mo_physics' 1 ((PARAMETER UNKNOWN UNKNOWN UNKNOWN NONE
+NONE) (REAL 4) 0 0 () (CONSTANT (REAL 4) 0 '8950579' 0 135) () () '' ()
+())
+65 'to_ice1' 'mo_physics' 1 ((PARAMETER UNKNOWN UNKNOWN UNKNOWN NONE
+NONE) (REAL 4) 0 0 () (CONSTANT (REAL 4) 0 '8721203' 0 135) () () '' ()
+())
+66 'to_ice2' 'mo_physics' 1 ((PARAMETER UNKNOWN UNKNOWN UNKNOWN NONE
+NONE) (REAL 4) 0 0 () (CONSTANT (REAL 4) 0 '8894873' 0 135) () () '' ()
+())
+67 'toclim' 'mo_physics' 1 ((VARIABLE UNKNOWN UNKNOWN UNKNOWN NONE NONE
+DIMENSION) (REAL 4) 0 0 () (3 EXPLICIT (CONSTANT (INTEGER 4) 0 '1') (
+CONSTANT (INTEGER 4) 0 '96') (CONSTANT (INTEGER 4) 0 '1') (CONSTANT (
+INTEGER 4) 0 '48') (CONSTANT (INTEGER 4) 0 '1') (CONSTANT (INTEGER 4) 0
+'730')) () '' () ())
+68 'tof_correct' 'mo_physics' 1 ((VARIABLE UNKNOWN UNKNOWN UNKNOWN NONE
+NONE DIMENSION) (REAL 4) 0 0 () (3 EXPLICIT (CONSTANT (INTEGER 4) 0 '1')
+(CONSTANT (INTEGER 4) 0 '96') (CONSTANT (INTEGER 4) 0 '1') (CONSTANT (
+INTEGER 4) 0 '48') (CONSTANT (INTEGER 4) 0 '1') (CONSTANT (INTEGER 4) 0
+'730')) () '' () ())
+69 'uclim' 'mo_physics' 1 ((VARIABLE UNKNOWN UNKNOWN UNKNOWN NONE NONE
+DIMENSION) (REAL 4) 0 0 () (3 EXPLICIT (CONSTANT (INTEGER 4) 0 '1') (
+CONSTANT (INTEGER 4) 0 '96') (CONSTANT (INTEGER 4) 0 '1') (CONSTANT (
+INTEGER 4) 0 '48') (CONSTANT (INTEGER 4) 0 '1') (CONSTANT (INTEGER 4) 0
+'730')) () '' () ())
+70 'uclim_m' 'mo_physics' 1 ((VARIABLE UNKNOWN UNKNOWN UNKNOWN NONE NONE
+DIMENSION) (REAL 4) 0 0 () (3 EXPLICIT (CONSTANT (INTEGER 4) 0 '1') (
+CONSTANT (INTEGER 4) 0 '96') (CONSTANT (INTEGER 4) 0 '1') (CONSTANT (
+INTEGER 4) 0 '48') (CONSTANT (INTEGER 4) 0 '1') (CONSTANT (INTEGER 4) 0
+'730')) () '' () ())
+71 'uclim_p' 'mo_physics' 1 ((VARIABLE UNKNOWN UNKNOWN UNKNOWN NONE NONE
+DIMENSION) (REAL 4) 0 0 () (3 EXPLICIT (CONSTANT (INTEGER 4) 0 '1') (
+CONSTANT (INTEGER 4) 0 '96') (CONSTANT (INTEGER 4) 0 '1') (CONSTANT (
+INTEGER 4) 0 '48') (CONSTANT (INTEGER 4) 0 '1') (CONSTANT (INTEGER 4) 0
+'730')) () '' () ())
+72 'vclim' 'mo_physics' 1 ((VARIABLE UNKNOWN UNKNOWN UNKNOWN NONE NONE
+DIMENSION) (REAL 4) 0 0 () (3 EXPLICIT (CONSTANT (INTEGER 4) 0 '1') (
+CONSTANT (INTEGER 4) 0 '96') (CONSTANT (INTEGER 4) 0 '1') (CONSTANT (
+INTEGER 4) 0 '48') (CONSTANT (INTEGER 4) 0 '1') (CONSTANT (INTEGER 4) 0
+'730')) () '' () ())
+73 'vclim_m' 'mo_physics' 1 ((VARIABLE UNKNOWN UNKNOWN UNKNOWN NONE NONE
+DIMENSION) (REAL 4) 0 0 () (3 EXPLICIT (CONSTANT (INTEGER 4) 0 '1') (
+CONSTANT (INTEGER 4) 0 '96') (CONSTANT (INTEGER 4) 0 '1') (CONSTANT (
+INTEGER 4) 0 '48') (CONSTANT (INTEGER 4) 0 '1') (CONSTANT (INTEGER 4) 0
+'730')) () '' () ())
+74 'vclim_p' 'mo_physics' 1 ((VARIABLE UNKNOWN UNKNOWN UNKNOWN NONE NONE
+DIMENSION) (REAL 4) 0 0 () (3 EXPLICIT (CONSTANT (INTEGER 4) 0 '1') (
+CONSTANT (INTEGER 4) 0 '96') (CONSTANT (INTEGER 4) 0 '1') (CONSTANT (
+INTEGER 4) 0 '48') (CONSTANT (INTEGER 4) 0 '1') (CONSTANT (INTEGER 4) 0
+'730')) () '' () ())
+75 'wz_air' 'mo_physics' 1 ((VARIABLE UNKNOWN UNKNOWN UNKNOWN NONE NONE
+DIMENSION) (REAL 4) 0 0 () (2 EXPLICIT (CONSTANT (INTEGER 4) 0 '1') (
+CONSTANT (INTEGER 4) 0 '96') (CONSTANT (INTEGER 4) 0 '1') (CONSTANT (
+INTEGER 4) 0 '48')) () '' () ())
+76 'wz_vapor' 'mo_physics' 1 ((VARIABLE UNKNOWN UNKNOWN UNKNOWN NONE
+NONE DIMENSION) (REAL 4) 0 0 () (2 EXPLICIT (CONSTANT (INTEGER 4) 0 '1')
+(CONSTANT (INTEGER 4) 0 '96') (CONSTANT (INTEGER 4) 0 '1') (CONSTANT (
+INTEGER 4) 0 '48')) () '' () ())
+77 'xdim' 'mo_numerics' 1 ((PARAMETER UNKNOWN UNKNOWN UNKNOWN NONE NONE)
+(INTEGER 4) 0 0 () (CONSTANT (INTEGER 4) 0 '96') () () '' () ())
+78 'ydim' 'mo_numerics' 1 ((PARAMETER UNKNOWN UNKNOWN UNKNOWN NONE NONE)
+(INTEGER 4) 0 0 () (CONSTANT (INTEGER 4) 0 '48') () () '' () ())
+79 'z_air' 'mo_physics' 1 ((PARAMETER UNKNOWN UNKNOWN UNKNOWN NONE NONE)
+(REAL 4) 0 0 () (CONSTANT (REAL 4) 0 '8601600' 0 140) () () '' () ())
+80 'z_ocean' 'mo_physics' 1 ((VARIABLE UNKNOWN UNKNOWN UNKNOWN NONE NONE
+DIMENSION) (REAL 4) 0 0 () (2 EXPLICIT (CONSTANT (INTEGER 4) 0 '1') (
+CONSTANT (INTEGER 4) 0 '96') (CONSTANT (INTEGER 4) 0 '1') (CONSTANT (
+INTEGER 4) 0 '48')) () '' () ())
+81 'z_topo' 'mo_physics' 1 ((VARIABLE UNKNOWN UNKNOWN UNKNOWN NONE NONE
+DIMENSION) (REAL 4) 0 0 () (2 EXPLICIT (CONSTANT (INTEGER 4) 0 '1') (
+CONSTANT (INTEGER 4) 0 '96') (CONSTANT (INTEGER 4) 0 '1') (CONSTANT (
+INTEGER 4) 0 '48')) () '' () ())
+82 'z_vapor' 'mo_physics' 1 ((PARAMETER UNKNOWN UNKNOWN UNKNOWN NONE
+NONE) (REAL 4) 0 0 () (CONSTANT (REAL 4) 0 '10240000' 0 139) () () '' ()
+())
+45 'time_scnr' 'mo_numerics' 1 ((VARIABLE UNKNOWN UNKNOWN UNKNOWN NONE
+NONE IN_NAMELIST) (INTEGER 4) 0 0 () () () '' () ())
+44 'time_ctrl' 'mo_numerics' 1 ((VARIABLE UNKNOWN UNKNOWN UNKNOWN NONE
+NONE IN_NAMELIST) (INTEGER 4) 0 0 () () () '' () ())
+43 'time_flux' 'mo_numerics' 1 ((VARIABLE UNKNOWN UNKNOWN UNKNOWN NONE
+NONE IN_NAMELIST) (INTEGER 4) 0 0 () () () '' () ())
+)
+
+('a_cloud' 0 2 'a_no_ice' 0 3 'cap_air' 0 4 'cap_land' 0 5 'cap_ocean' 0
+6 'cap_surf' 0 7 'ce' 0 8 'cldclim' 0 9 'co_turb' 0 10 'cp_air' 0 11
+'cp_land' 0 12 'cp_ocean' 0 13 'cq_latent' 0 14 'cq_rain' 0 15 'ct_sens'
+0 16 'd_air' 0 17 'd_land' 0 18 'd_ocean' 0 19 'da_ice' 0 20 'dlat' 0 21
+'dlon' 0 22 'dt' 0 23 'dt_crcl' 0 24 'dtrad' 0 25 'eps' 0 26 'glacier' 0
+27 'ipx' 0 28 'ipy' 0 29 'ireal' 0 30 'ityr' 0 31 'jday' 0 32 'jday_mon'
+0 33 'kappa' 0 34 'log_exp' 0 35 'mldclim' 0 36 'mo_numerics' 0 37
+'mo_physics' 0 38 'ndays_yr' 0 39 'ndt_days' 0 40 'nstep_yr' 0 41
+'numerics' 0 42 'p_emi' 0 46 'physics' 0 47 'pi' 0 48 'qclim' 0 49
+'qf_correct' 0 50 'r_qviwv' 0 51 'rho_air' 0 52 'rho_land' 0 53
+'rho_ocean' 0 54 'sig' 0 55 'sw_solar' 0 56 'swetclim' 0 57 't0' 0 58 't1'
+0 59 't2' 0 60 'tclim' 0 61 'tf_correct' 0 62 'time_ctrl' 0 44 'time_flux'
+0 43 'time_scnr' 0 45 'tl_ice1' 0 63 'tl_ice2' 0 64 'to_ice1' 0 65
+'to_ice2' 0 66 'toclim' 0 67 'tof_correct' 0 68 'uclim' 0 69 'uclim_m' 0
+70 'uclim_p' 0 71 'vclim' 0 72 'vclim_m' 0 73 'vclim_p' 0 74 'wz_air' 0
+75 'wz_vapor' 0 76 'xdim' 0 77 'ydim' 0 78 'z_air' 0 79 'z_ocean' 0 80
+'z_topo' 0 81 'z_vapor' 0 82)

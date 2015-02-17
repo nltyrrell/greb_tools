@@ -1,0 +1,50 @@
+60:  integer  :: log_exp = 0                ! process control logics for sens. exp.
+118:  namelist / physics / log_exp
+162:  if (log_exp ==  1) where(z_topo > 1.) z_topo = 1.0      ! sens. exp. constant topo
+163:  if (log_exp <=  2) cldclim = 0.7                        ! sens. exp. constant cloud cover
+164:  if (log_exp <=  3) qclim   = 0.0052                     ! sens. exp. constant water vapor
+165:  if (log_exp <=  9) mldclim = d_ocean                    ! sens. exp. no deep ocean
+166:  if (log_exp == 11) mldclim = d_ocean                    ! sens. exp. no deep ocean
+179:  if (log_exp == 12 .or. log_exp == 13 ) CO2_ctrl = 298.  ! A1B scenario
+218:  print*,'% SCENARIO EXP: ',log_exp,'  time=', time_scnr,'yr'
+225:     if(log_exp >= 14 .and. log_exp <= 16) CO2 = CO2_ctrl
+226:     if(log_exp >= 14 .and. log_exp <= 16) where (z_topo < 0.0) Ts1 = Tclim(:,:,ityr)+1.0 
+371:&                         , cldclim, log_exp
+394:  if (log_exp <= 5) a_surf = a_no_ice
+412:&                           r_qviwv, z_air, z_vapor, dTrad, p_emi, log_exp
+423:  if(log_exp == 11) e_vapor = exp(-z_topo/z_air)*r_qviwv*qclim(:,:,ityr)     ! sens. exp. linear-function
+430:  if(log_exp == 11)  em = em +0.022/(0.15*24.)*r_qviwv*(q-qclim(:,:,ityr)) ! sens. exp. linear-function
+446:&                           ce, cq_latent, cq_rain, z_air, r_qviwv, log_exp
+453:  if(log_exp <=  6 .or. log_exp == 13 .or. log_exp == 15) return
+481:&                           log_exp, To_ice1, To_ice2, glacier, mldclim
+492:  if( log_exp <= 5 ) then
+508:  USE mo_physics,     ONLY: ityr, z_topo, mldclim, log_exp, To_ice2,     &
+514:  if ( log_exp <= 9 .or. log_exp == 11 )   return
+515:  if ( log_exp >= 14 .and. log_exp <= 16 ) return
+543:  USE mo_physics,   ONLY: log_exp, z_vapor
+553:  if(log_exp  <=  4 ) return
+554:  if(log_exp .eq.  7 .and. h_scl .eq. z_vapor) return
+555:  if(log_exp .eq. 16 .and. h_scl .eq. z_vapor) return
+560:  if(log_exp .eq. 8 .and. h_scl .eq. z_vapor) then
+582:  USE mo_physics,    ONLY: pi, z_topo, log_exp, kappa, z_vapor
+752:  USE mo_physics,  ONLY: pi, z_topo, uclim, vclim, ityr, z_vapor, log_exp
+943:  USE mo_physics,     ONLY: log_exp
+946:  if( log_exp .eq. 12 .or.  log_exp .eq. 13 ) then
+
+List of experiments:
+log_exp == 1
+	constant topography
+log_exp <= 2
+	Constant Cloud Cover
+log_exp <= 3
+	Constant water vapour
+log_exp <= 9
+log_exp == 11
+	no deep ocean
+log_exp == 12 or 13
+	A1B Scenario
+log_exp >= 14 and <= 16
+	SST +1K experiment
+log_exp == 5
+	no ice albedo feedback (ice has albedo = 0.1)
+
