@@ -31,35 +31,35 @@ def read_data(years, infile, variable, time_length, scenario_name):
         xin5 = np.fromfile(fid, np.float32, count=xydim) #albedo
 
         
-        # Populate array with data from the chosen variable
-        if variable == 't_surf':
-            xin = xin1 
-            long_name = 'surface temperature'
-            standard_name = 'surface_temperature'
-            unit = iris.unit.Unit('K')
-        elif variable == 't_atmos':
-            xin = xin2
-            long_name = 'atmosphere temperature'
-            standard_name = 'air_temperature'
-            unit = iris.unit.Unit('K')
-        elif variable == 't_ocean':
-            xin = xin3
-            long_name = 'ocean temperature'
-            standard_name = 'sea_surface_temperature'
-            unit = iris.unit.Unit('K')
-        elif variable == 'vapour':
-            xin = xin4
-            long_name = 'water vapour'
-            standard_name = 'specific_humidity'
-            unit = iris.unit.Unit('kg kg-1')
-        elif variable == 'albedo':
-            xin = xin5                      
-            long_name = 'surface temperature'
-            standard_name = 'surface_albedo'
-            unit = iris.unit.Unit('1')
-        for i in np.arange(0,ydim):
-            field[:,i,n] = xin[(xdim*(i)):((i+1)*xdim)]  
-        #Function to flip and rotate data
+    # Populate array with data from the chosen variable
+    if variable == 't_surf':
+        xin = xin1 
+        long_name = 'surface temperature'
+        standard_name = 'surface_temperature'
+        unit = iris.unit.Unit('K')
+    elif variable == 't_atmos':
+        xin = xin2
+        long_name = 'atmosphere temperature'
+        standard_name = 'air_temperature'
+        unit = iris.unit.Unit('K')
+    elif variable == 't_ocean':
+        xin = xin3
+        long_name = 'ocean temperature'
+        standard_name = 'sea_surface_temperature'
+        unit = iris.unit.Unit('K')
+    elif variable == 'vapour':
+        xin = xin4
+        long_name = 'water vapour'
+        standard_name = 'specific_humidity'
+        unit = iris.unit.Unit('kg kg-1')
+    elif variable == 'albedo':
+        xin = xin5                      
+        long_name = 'surface temperature'
+        standard_name = 'surface_albedo'
+        unit = iris.unit.Unit('1')
+    for i in np.arange(0,ydim):
+        field[:,i,n] = xin[(xdim*(i)):((i+1)*xdim)]  
+    #Function to flip and rotate data
 
     field = np.rot90(field)
     field = np.flipud(field) 
