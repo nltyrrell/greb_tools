@@ -942,7 +942,7 @@ subroutine co2_level(it, year, CO2)
   USE mo_numerics,    ONLY: ndays_yr, ndt_days
   USE mo_physics,     ONLY: log_exp
 
-  CO2 = 340. ! changed to 340, for double CO2 use 680. - nlt feb 15
+  CO2 = 280. ! changed to 340, for double CO2 use 680. - nlt feb 15
   if( log_exp .eq. 12 .or.  log_exp .eq. 13 ) then
      CO2_1950=310.;  CO2_2000=370.;  CO2_2050=520.
      if (year <= 2000.) CO2=CO2_1950 + 60./50.*(year-1950.)
