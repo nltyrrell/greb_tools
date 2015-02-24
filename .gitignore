@@ -2,6 +2,7 @@ ncfiles/
 *.nc
 *.bin
 *.swp
+*.mod
 ofile
 temp
 scenario
