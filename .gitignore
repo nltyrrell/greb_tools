@@ -1,2 +1,5 @@
 ncfiles/
+*.bin
 *.swp
+ofile
+temp
