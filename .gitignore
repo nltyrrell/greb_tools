@@ -1,5 +1,9 @@
 ncfiles/
+*.nc
 *.bin
 *.swp
 ofile
 temp
+scenario
+control
+
