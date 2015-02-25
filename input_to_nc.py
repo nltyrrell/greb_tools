@@ -53,8 +53,8 @@ def read_data(infile, n_tsteps):
     for n in np.arange(0,n_tsteps):    #Loop through time steps in data
         xin = np.fromfile(fid, np.float32, count=xydim) #t_surf
         
-    for i in np.arange(0,ydim):
-        field[:,i,n] = xin[(xdim*(i)):((i+1)*xdim)]  
+        for i in np.arange(0,ydim):
+            field[:,i,n] = xin[(xdim*(i)):((i+1)*xdim)]  
         #Function to flip and rotate data
 
     field = np.rot90(field)

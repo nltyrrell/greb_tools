@@ -1,6 +1,8 @@
 #!/bin/bash
 # compile GREB model
 rm -f greb.x *.mod
+rm scenario
+rm control
 # ifort -assume byterecl -O3 -xhost -align all -fno-alias greb.model.f90 greb.shell.web-public.f90 -o greb.x 
 g95 greb.model.f90 greb.shell.web-public.f90 -o greb.x 
 

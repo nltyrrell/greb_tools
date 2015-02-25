@@ -22,15 +22,39 @@ def writebin(infile_nc,outfile_bin):
     writes the outfile to disk
     """
     dataflat = infile_nc.data.flatten().astype(np.float32)
-    ofile = open('outfile.bin','wb')
+    ofile = open(outfile_bin,'wb')
     dataflat.tofile(ofile)
     ofile.close()
 
+mer_wind = iris.load_cube('./ncfiles/meridional.wind.nc')
+anom_v = iris.load_cube('./ncfiles/v_reg_aus_850.nc')
+anom_u = iris.load_cube('./ncfiles/u_reg_aus_850.nc')
 
-infile = iris.load_cube('./ncfiles/meridional.wind.nc')
+anom_v.standard_name = mer_wind.standard_name
+anom_v.units = mer_wind.units
+# Remove 'coord system' for regridding to work
+anom_v.coord('latitude').coord_system = None
+anom_v.coord('longitude').coord_system = None
 
-input_files = ['meridional.wind', 'zonal.wind','tsurf','soil.moisture','vapor','ocean.mld','cloud.cover']
+# Rearrange order of coords
+mer_wind.transpose([2,0,1])
 
+#regrid v anom
+anom_v = anom_v.regrid(mer_wind[0,::],iris.analysis.Linear())
+
+new_merwind = mer_wind.copy()
+new_merwind.data = anom_v.data + mer_wind.data
+
+iris.save(new_merwind,'./ncfiles/meridional.wind.vanom.nc')
+# mer_wind.data = mer_wind.data 
+
+# cube_list = iris.cube.CubeList()
+# input_files = ['meridional.wind', 'zonal.wind','tsurf','soil.moisture','vapor','ocean.mld','cloud.cover']
+# 
+# for i in files:
+#     infile = iris.load_cube('./ncfiles/'+i+'nc')
+#     cube_list.append(infile)
+# 
 
 sys.exit()
 

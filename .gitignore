@@ -1,4 +1,5 @@
 ncfiles/
+input_files/
 *.nc
 *.bin
 *.swp
