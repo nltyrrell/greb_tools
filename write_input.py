@@ -45,7 +45,12 @@ anom_v = anom_v.regrid(mer_wind[0,::],iris.analysis.Linear())
 new_merwind = mer_wind.copy()
 new_merwind.data = anom_v.data + mer_wind.data
 
+new_merwind.transpose([1,2,0])
+
 iris.save(new_merwind,'./ncfiles/meridional.wind.vanom.nc')
+writebin(new_merwind,'./input_files/meridional.wind.vanom.bin')
+
+
 # mer_wind.data = mer_wind.data 
 
 # cube_list = iris.cube.CubeList()
