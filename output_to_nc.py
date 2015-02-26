@@ -120,7 +120,6 @@ years = file_size/(xdim*ydim*len(var_list)*tstep*12)
 
 greb_data, newcube = read_data(years, file_name, 't_surf', scenario_name=scenario_name) # read data
 #read and plot data
-sys.exit('exiiiiiiiiiiiiiiiiiiiiit')
 for i in var_list:
     greb_data, newcube = read_data(years, file_name, i, scenario_name=scenario_name) # read data
     cube_list.append(newcube)

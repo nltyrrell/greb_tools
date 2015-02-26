@@ -26,29 +26,37 @@ def writebin(infile_nc,outfile_bin):
     dataflat.tofile(ofile)
     ofile.close()
 
-mer_wind = iris.load_cube('./ncfiles/meridional.wind.nc')
-anom_v = iris.load_cube('./ncfiles/v_reg_aus_850.nc')
-anom_u = iris.load_cube('./ncfiles/u_reg_aus_850.nc')
+def write_v_anom():
+    """
+    Reads in netcdf files of meridional wind and anomalous winds
+    add anomalies to input files
+    writes out nc and bin files
+    """
 
-anom_v.standard_name = mer_wind.standard_name
-anom_v.units = mer_wind.units
-# Remove 'coord system' for regridding to work
-anom_v.coord('latitude').coord_system = None
-anom_v.coord('longitude').coord_system = None
+    mer_wind = iris.load_cube('./ncfiles/meridional.wind.nc')
+    anom_v = iris.load_cube('./ncfiles/v_reg_aus_850.nc')
+    print 'meridional.wind and anomalous wind loaded'
 
-# Rearrange order of coords
-mer_wind.transpose([2,0,1])
+    anom_v.standard_name = mer_wind.standard_name
+    anom_v.units = mer_wind.units
+    # Remove 'coord system' for regridding to work
+    anom_v.coord('latitude').coord_system = None
+    anom_v.coord('longitude').coord_system = None
 
-#regrid v anom
-anom_v = anom_v.regrid(mer_wind[0,::],iris.analysis.Linear())
+    # Rearrange order of coords
+    mer_wind.transpose([2,0,1])
 
-new_merwind = mer_wind.copy()
-new_merwind.data = anom_v.data + mer_wind.data
+    #regrid v anom
+    anom_v = anom_v.regrid(mer_wind[0,::],iris.analysis.Linear())
 
-new_merwind.transpose([1,2,0])
+    new_merwind = mer_wind.copy()
+    new_merwind.data = anom_v.data + mer_wind.data
 
-iris.save(new_merwind,'./ncfiles/meridional.wind.vanom.nc')
-writebin(new_merwind,'./input_files/meridional.wind.vanom.bin')
+    new_merwind.transpose([1,2,0])
+
+    print 'Writing meridional.wind.v_anom.bin and meridional.wind.v_anom.nc and anomalous wind loaded'
+    iris.save(new_merwind,'./ncfiles/meridional.wind.v_anom.pos.nc')
+    writebin(new_merwind,'./input_files/meridional.wind.v_anom.pos.bin')
 
 
 # mer_wind.data = mer_wind.data 
@@ -61,7 +69,6 @@ writebin(new_merwind,'./input_files/meridional.wind.vanom.bin')
 #     cube_list.append(infile)
 # 
 
-sys.exit()
 
 #########################################################################################
 #Function to read data from GREB 
