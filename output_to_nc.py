@@ -12,13 +12,13 @@ import os
 
 #########################################################################################
 #Function to read data from GREB 
-def read_data(years, infile, variable, scenario_name): 
+def read_data(years, infile, variable, exp_name): 
     xdim  = 96              # x dimensions                  
     ydim  = 48              # y dimensions
     dx    = 3.75            # model resolution
     xydim = xdim*ydim
     tdim  = 12*years        #Total time steps in the data
-    print tdim
+    print 'tdim = '+str(tdim)
     
     
     field = np.zeros((xdim,ydim,tdim)) # Create a zero numpy array with correct dimensions
@@ -27,8 +27,6 @@ def read_data(years, infile, variable, scenario_name):
     #Process data for plotting
     for n in np.arange(0,tdim):    #Loop through time steps in data
         xin1 = np.fromfile(fid, np.float32, count=xydim) #t_surf
-        print "tdim = "+str(n)
-        print xin1.mean()
         xin2 = np.fromfile(fid, np.float32, count=xydim) #t_atmos
         xin3 = np.fromfile(fid, np.float32, count=xydim) #t_ocean
         xin4 = np.fromfile(fid, np.float32, count=xydim) #vapour 
@@ -61,8 +59,6 @@ def read_data(years, infile, variable, scenario_name):
             long_name = 'surface temperature'
             standard_name = 'surface_albedo'
             unit = iris.unit.Unit('1')
-        print xin.shape
-        print xin.mean()
         for i in np.arange(0,ydim):
             field[:,i,n] = xin[(xdim*(i)):((i+1)*xdim)]  
     #Function to flip and rotate data
@@ -84,45 +80,36 @@ def read_data(years, infile, variable, scenario_name):
         
     fid.close()
 
-    iris.save(newcube,'./ncfiles/'+variable+'.'+scenario_name+'.nc')
+    iris.save(newcube,'./ncfiles/'+variable+'.'+exp_name+'.nc')
+    print 'Save cube as '+ './ncfiles/'+variable+'.'+exp_name+'.nc'
     return field, newcube
 
     
-#########################################################################################
-#End of defined funcs   
-#########################################################################################
-#Sample plotting script begins
-##########################################################################################
-#Parameters
-# t_surf = 'surface temperature'
-# t_atmos = 'temperature of atmosphere'
-# t_ocean = 'temperature of ocean'
-# vapour = 'water vapour'
-# albedo = 'albedo'    
+def write_exp(exp_name):
 
-var_list = ['t_surf', 't_atmos', 't_ocean', 'vapour', 'albedo']
-cube_list = iris.cube.CubeList()
+    var_list = ['t_surf', 't_atmos', 't_ocean', 'vapour', 'albedo']
+    cube_list = iris.cube.CubeList()
 
-#Dimensions
-xdim  = 96
-ydim  = 48
-dx    = 3.75
-tstep = 4 #timesteps per day
-xydim = xdim*ydim
+    #Dimensions
+    xdim  = 96
+    ydim  = 48
+    dx    = 3.75
+    tstep = 4 #timesteps per day
+    xydim = xdim*ydim
 
-#Variables 
-scenario_name = 'exp5' #'a1b'
-file_name = scenario_name+'.bin' #File name of data to plot
-file_size = os.stat(file_name).st_size
-years = file_size/(xdim*ydim*len(var_list)*tstep*12)
-# years = 50 # must match data from GREB model. Choose the number of years that the GREB model is set to run for
-# climate_variable = albedo # Choose climate variable to plot
+    #Variables 
+    file_name = './bin_files/scenario.'+exp_name+'.bin' #File name of data to plot
+    print file_name
+    file_size = os.stat(file_name).st_size
+    years = file_size/(xdim*ydim*len(var_list)*tstep*12)
+    # years = 50 # must match data from GREB model. Choose the number of years that the GREB model is set to run for
+    # climate_variable = albedo # Choose climate variable to plot
 
-greb_data, newcube = read_data(years, file_name, 't_surf', scenario_name=scenario_name) # read data
-#read and plot data
-for i in var_list:
-    greb_data, newcube = read_data(years, file_name, i, scenario_name=scenario_name) # read data
-    cube_list.append(newcube)
+    #read and plot data
+    for i in var_list:
+        greb_data, newcube = read_data(years, file_name, i, exp_name=exp_name) # read data
+        cube_list.append(newcube)
+    return cube_list
 
 
 

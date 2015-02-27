@@ -1,6 +1,6 @@
 &NUMERICS
 time_flux = 3  ! length of flux corrections run [yrs]
-time_ctrl = 5  ! length of control run [yrs
+time_ctrl = 3  ! length of control run [yrs
 time_scnr = 5  ! length of scenariorun [yrs
 /
 &PHYSICS
