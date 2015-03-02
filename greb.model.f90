@@ -215,20 +215,31 @@ subroutine greb_model
   end do
 
 ! scenario run
-  print*,'% SCENARIO EXP: ',log_exp,'  time=', time_scnr,'yr'
-  Ts1 = Ts_ini; Ta1 = Ta_ini; q1 = q_ini; To1 = To_ini                     ! initialize fields
-  year=1940; CO2=280.0; mon=1; irec=0; Tmm=0.; Tamm=0.; qmm=0.; apmm=0.; 
-  do it=1, time_scnr*nstep_yr                                              ! main time loop
-     call co2_level(it, year, CO2)
+    print*,'% SCENARIO EXP: ',log_exp,'  time=', time_scnr,'yr'
+    Ts1 = Ts_ini; Ta1 = Ta_ini; q1 = q_ini; To1 = To_ini                     ! initialize fields
+    year=1940; CO2=280.0; mon=1; irec=0; Tmm=0.; Tamm=0.; qmm=0.; apmm=0.; 
 
-     ! sens. exp. SST+1
-     if(log_exp >= 14 .and. log_exp <= 16) CO2 = CO2_ctrl
-     if(log_exp >= 14 .and. log_exp <= 16) where (z_topo < 0.0) Ts1 = Tclim(:,:,ityr)+1.0 
+    vclim(30:40,12:20,:) = vclim(30:40,12:20,:) - 1
+    
+    where (vclim(:,:,:) >= 0.0) 
+        vclim_m = vclim
+        vclim_p = 0.0
+    elsewhere
+        vclim_m = 0.0
+        vclim_p = vclim
+    end where
 
-     call time_loop(it,isrec, year, CO2, irec, mon, 22, Ts1, Ta1, q1, To1, Ts0,Ta0, q0, To0 ) 
-     Ts1=Ts0; Ta1=Ta0; q1=q0; To1=To0      
-     if (mod(it,nstep_yr) == 0) year=year+1
-  end do
+    do it=1, time_scnr*nstep_yr                                              ! main time loop
+        call co2_level(it, year, CO2)
+
+        ! sens. exp. SST+1
+        if(log_exp >= 14 .and. log_exp <= 16) CO2 = CO2_ctrl
+        if(log_exp >= 14 .and. log_exp <= 16) where (z_topo < 0.0) Ts1 = Tclim(:,:,ityr)+1.0 
+
+        call time_loop(it,isrec, year, CO2, irec, mon, 22, Ts1, Ta1, q1, To1, Ts0,Ta0, q0, To0 ) 
+        Ts1=Ts0; Ta1=Ta0; q1=q0; To1=To0      
+        if (mod(it,nstep_yr) == 0) year=year+1
+    end do
 
 end subroutine
 

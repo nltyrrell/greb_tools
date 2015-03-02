@@ -1,6 +1,7 @@
 ncfiles/
 input_files/
 orig_input/
+figures/
 *.pyc
 *.nc
 *.bin
