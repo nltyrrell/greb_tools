@@ -21,7 +21,11 @@ def writebin(infile_nc,outfile_bin):
     Output:
     writes the outfile to disk
     """
-    dataflat = infile_nc.data.flatten().astype(np.float32)
+
+    dataflat = infile_nc.data.copy()
+    dataflat = np.rot90(dataflat)
+    dataflat = np.flipud(dataflat)
+    dataflat = dataflat.flatten('F').astype(np.float32)
     ofile = open(outfile_bin,'wb')
     dataflat.tofile(ofile)
     ofile.close()
@@ -50,7 +54,7 @@ def write_v_anom():
     anom_v = anom_v.regrid(mer_wind[0,::],iris.analysis.Linear())
 
     new_merwind = mer_wind.copy()
-    new_merwind.data = anom_v.data + mer_wind.data
+    new_merwind.data = 5*anom_v.data + 1*mer_wind.data
 
     new_merwind.transpose([1,2,0])
 
@@ -58,5 +62,26 @@ def write_v_anom():
     iris.save(new_merwind,'./ncfiles/meridional.wind.v_anom.pos.nc')
     writebin(new_merwind,'./input_files/meridional.wind.v_anom.pos.bin')
 
+def write_smc():
+    """
+    Reads in netcdf files of meridional wind and anomalous winds
+    add anomalies to input files
+    writes out nc and bin files
+    """
+    smc = iris.load_cube('./ncfiles/soil.moisture.nc')
+#     anom_v = iris.load_cube('./ncfiles/v_reg_aus_850.nc')
+    print 'Soil moisture and anomalous wind loaded'
+
+    smcdata = smc.data.copy()
+    masklt = np.ma.masked_less(smcdata,1)
+    smc.data = smcdata * (~masklt.mask).astype(int)
+    smc.data = smc.data
+    print "all land now very, very dry"
+
+    print 'Writing soil.moisture.smc.dry.bin/nc'
+    iris.save(smc,'./ncfiles/soil.moisture.smc.dry.nc')
+    writebin(smc,'./input_files/soil.moisture.smc.dry.bin')
+
+    return smc
 
 

@@ -14,7 +14,7 @@ import os
 def read_data(infile, n_tsteps): 
     
     field = np.zeros((xdim,ydim,n_tsteps)) # Create a zero numpy array with correct dimensions
-    fid = open(infile,'r') 
+    fid = open('./orig_input/'+infile,'r') 
     print infile
 
     if infile == 'meridional.wind':
@@ -103,14 +103,14 @@ ireal = 4
 xydim = xdim*ydim
 
 #Variables 
-input_files = ['meridional.wind', 'zonal.wind','tsurf','soil.moisture','vapor','ocean.mld','cloud.cover','outfile.bin']
+input_files = ['meridional.wind', 'zonal.wind','tsurf','soil.moisture','vapor','ocean.mld','cloud.cover']
 time_length = 'annual' # Choose out of 'annual', 'DJF', 'MAM', 'JJA', 'SON' and months
 # years = 50 # must match data from GREB model. Choose the number of years that the GREB model is set to run for
 # climate_infile = albedo # Choose climate variable to plot
 
 #read and plot data
 for i in input_files:
-    file_size = os.stat(i).st_size
+    file_size = os.stat('./orig_input/'+i).st_size
     n_tsteps = file_size/(xdim*ydim*ireal)
     greb_data, newcube = read_data(i, n_tsteps)
 
