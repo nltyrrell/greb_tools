@@ -1,0 +1,26 @@
+\documentclass[12pt,a4paper]{article}
+
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{epstopdf}
+
+\graphicspath{{./figures/}{../pacemaker/figures/}}
+
+\newcommand{\epsfig}[2][0.5]{\includegraphics[width=#1\textwidth]{{#2}.eps}}
+\newcommand{\pngfig}[2][0.5]{\includegraphics[width=#1\textwidth]{{#2}.png}}
+\newcommand{\pdffig}[2][0.5]{\includegraphics[width=#1\textwidth]{{#2}.pdf}}
+
+
+
+\begin{document}
+\section{Lin Regression, Annual Means}
+\subsection{wind correlations}
+
+
+\pdffig[0.5]{Lin_Regression_Aus_tsfc_u_850.0.amip.ens1}
+\pdffig[0.5]{Lin_Regression_Aus_tsfc_v_850.0.amip.ens1}
+
+
+
+\end{document}
+
