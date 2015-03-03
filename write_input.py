@@ -30,10 +30,11 @@ def writebin(infile_nc,outfile_bin):
     dataflat.tofile(ofile)
     ofile.close()
 
-def write_v_anom():
+def write_v_anom(p_m="pos"):
     """
     Reads in netcdf files of meridional wind and anomalous winds
     add anomalies to input files
+    p_m = "pos" or "neg" for positive or negative anomaly
     writes out nc and bin files
     """
 
@@ -54,14 +55,16 @@ def write_v_anom():
 
     new_merwind = mer_wind.copy()
     anom_v_data = np.repeat(np.expand_dims(anom_v.data,2),mer_wind.shape[-1],2)
-    new_merwind.data = anom_v_data
-    print new_merwind
-
-#     new_merwind.transpose([1,2,0])
-
-    print 'Writing meridional.wind.v_anom.bin and meridional.wind.v_anom.nc and anomalous wind loaded'
-    iris.save(new_merwind,'./ncfiles/meridional.wind.v_anom.pos.nc')
-    writebin(new_merwind,'./input_files/meridional.wind.v_anom.pos.bin')
+    if p_m == "pos":
+        print "Positive anomaly"
+        new_merwind.data = anom_v_data
+    if p_m == "neg":
+        print "Negative anomaly"
+        new_merwind.data = -anom_v_data
+        
+    print 'Writing meridional.wind.anom and meridional.wind.anom.nc and anomalous wind loaded'
+    iris.save(new_merwind,'./ncfiles/meridional.wind.anom.nc')
+    writebin(new_merwind,'./input_files/meridional.wind.anom')
 
 def write_smc():
     """
@@ -71,7 +74,7 @@ def write_smc():
     """
     smc = iris.load_cube('./ncfiles/soil.moisture.nc')
 #     anom_v = iris.load_cube('./ncfiles/v_reg_aus_850.nc')
-    print 'Soil moisture and anomalous wind loaded'
+    print 'Soil moisture loaded'
 
     smcdata = smc.data.copy()
     masklt = np.ma.masked_less(smcdata,1)
@@ -79,10 +82,30 @@ def write_smc():
     smc.data = smc.data
     print "all land now very, very dry"
 
-    print 'Writing soil.moisture.smc.dry.bin/nc'
-    iris.save(smc,'./ncfiles/soil.moisture.smc.dry.nc')
-    writebin(smc,'./input_files/soil.moisture.smc.dry.bin')
+    print 'Writing soil.moisture.smc.anom/nc'
+    iris.save(smc,'./ncfiles/soil.moisture.smc.anom.nc')
+    writebin(smc,'./input_files/soil.moisture.smc.anom')
 
-    return smc
+    return # smc
 
+def write_blank_anom():
+    """
+    Create blank bin files of correct length as placeholders for further experiments
+    """
+
+    mer_wind = iris.load_cube('./ncfiles/meridional.wind.nc')
+    zonal_wind = iris.load_cube('./ncfiles/zonal.wind.nc')
+    soil_moisture = iris.load_cube('./ncfiles/soil.moisture.nc')
+    cloud_cover = iris.load_cube('./ncfiles/cloud.cover.nc')
+
+    mer_wind.data = np.zeros(mer_wind.shape)
+    zonal_wind.data = np.zeros(zonal_wind.shape)
+    soil_moisture.data = np.zeros(soil_moisture.shape)
+    cloud_cover.data = np.zeros(cloud_cover.shape)
+
+    print 'writing placeholder binary files to orig_input'
+    writebin(mer_wind,'./orig_input/meridional.wind.anom')
+    writebin(zonal_wind,'./orig_input/zonal.wind.anom')
+    writebin(soil_moisture,'./orig_input/soil.moisture.anom')
+    writebin(cloud_cover,'./orig_input/cloud.cover.anom')
 

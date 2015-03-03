@@ -28,7 +28,7 @@
   open(19,file='cloud.cover',     ACCESS='DIRECT',FORM='UNFORMATTED', RECL=ireal*xdim*ydim)
   open(20,file='glacier.masks',   ACCESS='DIRECT',FORM='UNFORMATTED', RECL=ireal*xdim*ydim)
   open(23,file='zonal.wind.anom',           ACCESS='DIRECT',FORM='UNFORMATTED', RECL=ireal*xdim*ydim)
-  open(24,file='meridional.wind.anom',    ACCESS='DIRECT',FORM='UNFORMATTED', RECL=ireal*xdim*ydim)
+  open(24,file='meridional.wind.anom',      ACCESS='DIRECT',FORM='UNFORMATTED', RECL=ireal*xdim*ydim)
   open(25,file='soil.moisture.anom',        ACCESS='DIRECT',FORM='UNFORMATTED', RECL=ireal*xdim*ydim)
   open(26,file='cloud.cover.anom',          ACCESS='DIRECT',FORM='UNFORMATTED', RECL=ireal*xdim*ydim)
 

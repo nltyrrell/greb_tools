@@ -57,7 +57,8 @@ module mo_physics
 !+++++++++++++++++++++++++++++++++++++++
 
   use mo_numerics
-  integer  :: log_exp = 0                ! process control logics for sens. exp.
+  integer           :: log_exp = 0                ! process control logics for sens. exp.
+  character(len=3)  :: anom = 'clm'               ! process control logics for sens. exp.
 
 ! physical parameter (natural constants)
   parameter( pi        = 3.1416 )  
@@ -105,7 +106,7 @@ module mo_physics
   real, dimension(ydim,nstep_yr)      ::  sw_solar
 
 ! declare anomalous fields
-  real, dimension(xdim,ydim,nstep_yr) ::  uanom, vanom, qanom, mldanom, Toanom, cldanom
+  real, dimension(xdim,ydim,nstep_yr) ::  uanom, vanom, qanom, swetanom, Toanom, cldanom
 ! declare constant fields
   real, dimension(xdim,ydim)          ::  cap_surf
   integer jday, ityr
@@ -117,7 +118,7 @@ module mo_physics
 
   real :: t0, t1, t2
 
-  namelist / physics / log_exp
+  namelist / physics / log_exp, anom
   
 end module mo_physics
 
@@ -221,14 +222,24 @@ subroutine greb_model
     Ts1 = Ts_ini; Ta1 = Ta_ini; q1 = q_ini; To1 = To_ini                     ! initialize fields
     year=1940; CO2=280.0; mon=1; irec=0; Tmm=0.; Tamm=0.; qmm=0.; apmm=0.; 
 
-    vclim = vclim + vanom               ! nlt 3/3/2015
-    
+    ! Add anomalous winds to climatology, nlt 3/2015
+    if(anom == 'wnd') print*,'anom = wind'
+
+    vclim = vclim + vanom               
     where (vclim(:,:,:) >= 0.0) 
         vclim_m = vclim
         vclim_p = 0.0
     elsewhere
         vclim_m = 0.0
         vclim_p = vclim
+    end where
+    uclim = uclim + uanom               
+    where (uclim(:,:,:) >= 0.0) 
+        uclim_m = uclim
+        uclim_p = 0.0
+    elsewhere
+        uclim_m = 0.0
+        uclim_p = uclim
     end where
 
     do it=1, time_scnr*nstep_yr                                              ! main time loop
