@@ -27,8 +27,10 @@
   open(18,file='ocean.mld',       ACCESS='DIRECT',FORM='UNFORMATTED', RECL=ireal*xdim*ydim)
   open(19,file='cloud.cover',     ACCESS='DIRECT',FORM='UNFORMATTED', RECL=ireal*xdim*ydim)
   open(20,file='glacier.masks',   ACCESS='DIRECT',FORM='UNFORMATTED', RECL=ireal*xdim*ydim)
-  open(23,file='zonal.wind.anom',      ACCESS='DIRECT',FORM='UNFORMATTED', RECL=ireal*xdim*ydim)
-  open(24,file='meridional.wind.anom', ACCESS='DIRECT',FORM='UNFORMATTED', RECL=ireal*xdim*ydim)
+  open(23,file='zonal.wind.anom',           ACCESS='DIRECT',FORM='UNFORMATTED', RECL=ireal*xdim*ydim)
+  open(24,file='meridional.wind.anom',    ACCESS='DIRECT',FORM='UNFORMATTED', RECL=ireal*xdim*ydim)
+  open(25,file='soil.moisture.anom',        ACCESS='DIRECT',FORM='UNFORMATTED', RECL=ireal*xdim*ydim)
+  open(26,file='cloud.cover.anom',          ACCESS='DIRECT',FORM='UNFORMATTED', RECL=ireal*xdim*ydim)
 
 ! read namelist 
   read(10,numerics)
@@ -49,6 +51,8 @@
      read(19,rec=n) cldclim(:,:,n)
      read(23,rec=n) uanom(:,:,n)
      read(24,rec=n) vanom(:,:,n)
+     read(25,rec=n) swetanom(:,:,n)
+     read(26,rec=n) cldanom(:,:,n)
   end do
 
 ! define deep ocean temp. as min of Tsurf but > 3.0 Celcius

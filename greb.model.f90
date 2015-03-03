@@ -104,6 +104,8 @@ module mo_physics
   real, dimension(xdim,ydim,nstep_yr) ::  TF_correct, qF_correct, ToF_correct, swetclim, dTrad
   real, dimension(ydim,nstep_yr)      ::  sw_solar
 
+! declare anomalous fields
+  real, dimension(xdim,ydim,nstep_yr) ::  uanom, vanom, qanom, mldanom, Toanom, cldanom
 ! declare constant fields
   real, dimension(xdim,ydim)          ::  cap_surf
   integer jday, ityr
@@ -219,7 +221,7 @@ subroutine greb_model
     Ts1 = Ts_ini; Ta1 = Ta_ini; q1 = q_ini; To1 = To_ini                     ! initialize fields
     year=1940; CO2=280.0; mon=1; irec=0; Tmm=0.; Tamm=0.; qmm=0.; apmm=0.; 
 
-    vclim(30:40,12:20,:) = vclim(30:40,12:20,:) - 1
+    vclim = vclim + vanom               ! nlt 3/3/2015
     
     where (vclim(:,:,:) >= 0.0) 
         vclim_m = vclim

@@ -48,15 +48,16 @@ def write_v_anom():
     anom_v.coord('longitude').coord_system = None
 
     # Rearrange order of coords
-    mer_wind.transpose([2,0,1])
-
+#     mer_wind.transpose([2,0,1])
     #regrid v anom
-    anom_v = anom_v.regrid(mer_wind[0,::],iris.analysis.Linear())
+    anom_v = anom_v.regrid(mer_wind[:,:,0],iris.analysis.Linear())
 
     new_merwind = mer_wind.copy()
-    new_merwind.data = 5*anom_v.data + 1*mer_wind.data
+    anom_v_data = np.repeat(np.expand_dims(anom_v.data,2),mer_wind.shape[-1],2)
+    new_merwind.data = anom_v_data
+    print new_merwind
 
-    new_merwind.transpose([1,2,0])
+#     new_merwind.transpose([1,2,0])
 
     print 'Writing meridional.wind.v_anom.bin and meridional.wind.v_anom.nc and anomalous wind loaded'
     iris.save(new_merwind,'./ncfiles/meridional.wind.v_anom.pos.nc')

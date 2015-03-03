@@ -11,4 +11,7 @@ ofile
 temp
 scenario
 control
-
+cloud.cover.anom
+meridional.wind.anom
+soil.moisture.anom
+zonal.wind.anom
