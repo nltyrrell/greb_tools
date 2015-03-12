@@ -102,25 +102,32 @@ def write_u_anom(p_m="pos"):
     iris.save(new_merwind,'./ncfiles/zonal.wind.anom.nc')
     writebin(new_merwind,'./input_files/zonal.wind.anom')
 
-def write_smc():
+def write_smc(p_n="pos"):
     """
     Reads in netcdf files of meridional wind and anomalous winds
     add anomalies to input files
     writes out nc and bin files
+    p_n = 'pos' or 'neg' to add or subtract anom
     """
     smc = iris.load_cube('./ncfiles/soil.moisture.nc')
-#     anom_v = iris.load_cube('./ncfiles/v_reg_aus_850.nc')
+    anom = iris.load_cube('./ncfiles/smc_reg_aus.nc')
     print 'Soil moisture loaded'
 
-    smcdata = smc.data.copy()
-    masklt = np.ma.masked_less(smcdata,1)
-    smc.data = smcdata * (~masklt.mask).astype(int)
-    smc.data = smc.data
-    print "all land now very, very dry"
+    anom = anom.regrid(smc[:,:,0],iris.analysis.Linear())
+
+    new_smc = smc.copy()
+    anom_data = np.repeat(np.expand_dims(anom.data,2),smc.shape[-1],2)
+    if p_n == "pos":
+        print "Positive anomaly"
+        new_smc.data = anom_data
+    if p_n == "neg":
+        print "Negative anomaly"
+        new_smc.data = -anom_data
 
     print 'Writing soil.moisture.smc.anom/nc'
-    iris.save(smc,'./ncfiles/soil.moisture.smc.anom.nc')
-    writebin(smc,'./input_files/soil.moisture.smc.anom')
+    iris.save(new_smc,'./ncfiles/soil.moisture.smc.anom.nc')
+    writebin(new_smc,'./input_files/soil.moisture.smc.anom')
+
 
     return # smc
 

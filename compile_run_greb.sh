@@ -4,8 +4,9 @@ rm -f greb.x *.mod
 rm scenario
 rm control
 # ifort -assume byterecl -O3 -xhost -align all -fno-alias greb.model.f90 greb.shell.web-public.f90 -o greb.x 
-g95 greb.model.f90 greb.shell.web-public.f90 -o greb.x 
 
+# g95 -O4 greb.model.f90 greb.shell.web-public.f90 -o greb.x 
+gfortran -march=native -O3 -ffast-math -funroll-loops greb.model.f90 greb.shell.web-public.f90 -o greb.x
 #  namelist
 # cat >namelist <<EOF
 # &NUMERICS

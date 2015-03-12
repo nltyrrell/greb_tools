@@ -16,18 +16,18 @@ def read_anom_data(infile):
     xdim  = 96
     ydim  = 48
     dx    = 3.75
+    ireal = 4
     tstep = 4 #timesteps per day
     xydim = xdim*ydim
 
     file_size = os.stat(infile).st_size
-    print file_size
-    n_tsteps = file_size/(xdim*ydim)
-    print n_tsteps
+#     print file_size
+    n_tsteps = file_size/(xdim*ydim*ireal)
+#     print n_tsteps
     field = np.zeros((xdim,ydim,n_tsteps)) # Create a zero numpy array with correct dimensions
     fid = open(infile,'r') 
-    print infile
 
-    long_name = 'long_name'
+    long_name = infile 
     unit = iris.unit.Unit('1')
 
     for n in np.arange(0,n_tsteps):    #Loop through time steps in data
@@ -63,7 +63,7 @@ def read_anom_data(infile):
 
 def read_anom_bin():
 
-    var_list = ['zonal.wind'] #.anom'] #'cloud.cover.anom', 'meridional.wind.anom', 'soil.moisture.anom', 'zonal.wind.anom']
+    var_list = ['cloud.cover.anom', 'meridional.wind.anom', 'soil.moisture.anom', 'zonal.wind.anom']
     cube_list = iris.cube.CubeList()
 
     #read and plot data

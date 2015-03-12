@@ -223,24 +223,39 @@ subroutine greb_model
     year=1940; CO2=280.0; mon=1; irec=0; Tmm=0.; Tamm=0.; qmm=0.; apmm=0.; 
 
     ! Add anomalous winds to climatology, nlt 3/2015
-    if(anom == 'wnd') print*,'anom = wind'
+    if (anom == 'wnd') then
+        print*,'anom = wind'
 
-    vclim = vclim + vanom               
-    where (vclim(:,:,:) >= 0.0) 
-        vclim_m = vclim
-        vclim_p = 0.0
-    elsewhere
-        vclim_m = 0.0
-        vclim_p = vclim
-    end where
-    uclim = uclim + uanom               
-    where (uclim(:,:,:) >= 0.0) 
-        uclim_m = uclim
-        uclim_p = 0.0
-    elsewhere
-        uclim_m = 0.0
-        uclim_p = uclim
-    end where
+        vclim = vclim + vanom               
+        where (vclim(:,:,:) >= 0.0) 
+            vclim_m = vclim
+            vclim_p = 0.0
+        elsewhere
+            vclim_m = 0.0
+            vclim_p = vclim
+        end where
+        uclim = uclim + uanom               
+        where (uclim(:,:,:) >= 0.0) 
+            uclim_m = uclim
+            uclim_p = 0.0
+        elsewhere
+            uclim_m = 0.0
+            uclim_p = uclim
+        end where
+    else if (anom == 'smc') then
+        print*,'anom = smc'
+        swetclim = swetclim + swetanom
+        where (swetclim(:,:,:) <= 0.0)
+            swetclim = 0.0
+        elsewhere (swetclim(:,:,:) >= 1.0)
+            swetclim = 1.0
+        end where
+    else if (anom == 'cld') then
+        print*,'anom = cld'
+        cldclim = cldclim + cldanom
+    else
+        print *, 'no experiment'
+    end if
 
     do it=1, time_scnr*nstep_yr                                              ! main time loop
         call co2_level(it, year, CO2)

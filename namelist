@@ -1,9 +1,9 @@
 &NUMERICS
-time_flux = 1  ! length of flux corrections run [yrs]
-time_ctrl = 1  ! length of control run [yrs
-time_scnr = 2  ! length of scenariorun [yrs
+time_flux = 3  ! length of flux corrections run [yrs]
+time_ctrl = 5  ! length of control run [yrs
+time_scnr = 100  ! length of scenariorun [yrs
 /
 &PHYSICS
 log_exp = 10 ! complete GREB model; 2xCO2 forcing
-anom = 'wnd' ! character(len3) choose anomaly (wnd (wind), smc, cld)
+anom = 'smc' ! character(len3) choose anomaly (smc (wind), smc, cld)
 /
