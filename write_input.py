@@ -114,22 +114,50 @@ def write_smc(p_n="pos"):
     print 'Soil moisture loaded'
 
     anom = anom.regrid(smc[:,:,0],iris.analysis.Linear())
-
+    oc_mask = np.ma.masked_greater_equal(smc.data,1)
+    oc = (~oc_mask.mask).astype('int')
     new_smc = smc.copy()
     anom_data = np.repeat(np.expand_dims(anom.data,2),smc.shape[-1],2)
     if p_n == "pos":
         print "Positive anomaly"
-        new_smc.data = anom_data
+        new_smc.data = anom_data*oc
     if p_n == "neg":
         print "Negative anomaly"
-        new_smc.data = -anom_data
+        new_smc.data = -anom_data*oc
 
     print 'Writing soil.moisture.smc.anom/nc'
     iris.save(new_smc,'./ncfiles/soil.moisture.smc.anom.nc')
     writebin(new_smc,'./input_files/soil.moisture.smc.anom')
 
 
-    return # smc
+    return # new_smc
+
+def write_cld(p_n="pos"):
+    """
+    Reads in netcdf files of meridional wind and anomalous winds
+    add anomalies to input files
+    writes out nc and bin files
+    p_n = 'pos' or 'neg' to add or subtract anom
+    """
+    cld = iris.load_cube('./ncfiles/cloud.cover.nc')
+    anom = iris.load_cube('./ncfiles/cld_reg_aus.nc')
+    print 'Cloud anom loaded'
+
+    anom = anom.regrid(cld[:,:,0],iris.analysis.Linear())
+    new_cld = cld.copy()
+    anom_data = np.repeat(np.expand_dims(anom.data,2),cld.shape[-1],2)
+    if p_n == "pos":
+        print "Positive anomaly"
+        new_cld.data = anom_data
+    if p_n == "neg":
+        print "Negative anomaly"
+        new_cld.data = -anom_data
+
+    print 'Writing cloud.cover.cld.anom/nc'
+    iris.save(new_cld,'./ncfiles/cloud.cover.cld.anom.nc')
+    writebin(new_cld,'./input_files/cloud.cover.cld.anom')
+
+    return # new_smc
 
 def write_blank_anom():
     """
