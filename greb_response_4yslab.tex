@@ -1,0 +1,39 @@
+\documentclass[12pt,a4paper]{article}
+
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{epstopdf}
+
+\graphicspath{{./figures/}{../pacemaker/figures/}}
+
+\newcommand{\epsfig}[2][0.5]{\includegraphics[width=#1\textwidth]{{#2}.eps}}
+\newcommand{\pngfig}[2][0.5]{\includegraphics[width=#1\textwidth]{{#2}.png}}
+\newcommand{\pdffig}[2][0.5]{\includegraphics[width=#1\textwidth]{{#2}.pdf}}
+
+
+
+\begin{document}
+\section{GREB Model}
+\subsection{Response to wind, cloud, soil moisture anomalies, anomalies taken 
+from 4yr osc slab experiment - using composite of max response}
+
+\pdffig[0.5]{tsfc_dif.cld.pos.4ycomp}
+\pdffig[0.5]{tsfc_dif.smc.pos.4ycomp}
+\pdffig[0.5]{tsfc_dif.u_anom.pos.4ycomp}
+\pdffig[0.5]{tsfc_dif.uv_anom.pos.4ycomp}
+\pdffig[0.5]{tsfc_dif.v_anom.pos.4ycomp}
+\pdffig[0.5]{tsfc_dif.all.pos.4ycomp}
+
+\subsection{Response to wind, cloud, soil moisture anomalies, anomalies taken 
+from AMIP experiment}
+
+\pdffig[0.5]{tsfc_dif.cld.pos}
+\pdffig[0.5]{tsfc_dif.smc.pos}
+\pdffig[0.5]{tsfc_dif.u_anom.pos}
+\pdffig[0.5]{tsfc_dif.uv_anom.pos}
+\pdffig[0.5]{tsfc_dif.v_anom.pos}
+
+
+
+\end{document}
+

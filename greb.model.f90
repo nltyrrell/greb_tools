@@ -225,7 +225,6 @@ subroutine greb_model
     ! Add anomalous winds to climatology, nlt 3/2015
     if (anom == 'wnd') then
         print*,'anom = wind'
-
         vclim = vclim + vanom               
         where (vclim(:,:,:) >= 0.0) 
             vclim_m = vclim
@@ -245,6 +244,7 @@ subroutine greb_model
     else if (anom == 'smc') then
         print*,'anom = smc'
         swetclim = swetclim + swetanom
+        ! ensure values of soil moisture are between 0-1
         where (swetclim(:,:,:) <= 0.0)
             swetclim = 0.0
         elsewhere (swetclim(:,:,:) >= 1.0)
@@ -253,6 +253,47 @@ subroutine greb_model
     else if (anom == 'cld') then
         print*,'anom = cld'
         cldclim = cldclim + cldanom
+        ! ensure values of cloud cover are between 0-1
+        where (cldclim(:,:,:) <= 0.0)
+            cldclim = 0.0
+        elsewhere (cldclim(:,:,:) >= 1.0)
+            cldclim = 1.0
+        end where
+    else if (anom == 'all') then
+        print*,'anom = all'
+        print*,'anom = wind'
+        vclim = vclim + vanom               
+        where (vclim(:,:,:) >= 0.0) 
+            vclim_m = vclim
+            vclim_p = 0.0
+        elsewhere
+            vclim_m = 0.0
+            vclim_p = vclim
+        end where
+        uclim = uclim + uanom               
+        where (uclim(:,:,:) >= 0.0) 
+            uclim_m = uclim
+            uclim_p = 0.0
+        elsewhere
+            uclim_m = 0.0
+            uclim_p = uclim
+        end where
+        print*,'anom = smc'
+        swetclim = swetclim + swetanom
+        ! ensure values of soil moisture are between 0-1
+        where (swetclim(:,:,:) <= 0.0)
+            swetclim = 0.0
+        elsewhere (swetclim(:,:,:) >= 1.0)
+            swetclim = 1.0
+        end where
+        print*,'anom = cld'
+        cldclim = cldclim + cldanom
+        ! ensure values of cloud cover are between 0-1
+        where (cldclim(:,:,:) <= 0.0)
+            cldclim = 0.0
+        elsewhere (cldclim(:,:,:) >= 1.0)
+            cldclim = 1.0
+        end where
     else
         print *, 'no experiment'
     end if

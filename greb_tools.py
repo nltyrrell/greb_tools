@@ -32,8 +32,6 @@ def read_anom_data(infile):
 
     for n in np.arange(0,n_tsteps):    #Loop through time steps in data
         xin = np.fromfile(fid, np.float32, count=xydim) #t_surf
-#         print xin.shape
-#         print n
 
         for i in np.arange(0,ydim):
             field[:,i,n] = xin[(xdim*(i)):((i+1)*xdim)]  

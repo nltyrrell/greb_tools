@@ -114,16 +114,18 @@ def write_smc(p_n="pos"):
     print 'Soil moisture loaded'
 
     anom = anom.regrid(smc[:,:,0],iris.analysis.Linear())
-    oc_mask = np.ma.masked_greater_equal(smc.data,1)
+    anom.data[(abs(anom.data) >= 1)]  = 0
+    oc_mask = np.ma.masked_greater_equal(smc.data,0.9)
     oc = (~oc_mask.mask).astype('int')
     new_smc = smc.copy()
     anom_data = np.repeat(np.expand_dims(anom.data,2),smc.shape[-1],2)
+    amp_factor = 1 # Amplify signal by x
     if p_n == "pos":
         print "Positive anomaly"
-        new_smc.data = anom_data*oc
+        new_smc.data = anom_data*oc*amp_factor
     if p_n == "neg":
         print "Negative anomaly"
-        new_smc.data = -anom_data*oc
+        new_smc.data = -anom_data*oc*amp_factor
 
     print 'Writing soil.moisture.smc.anom/nc'
     iris.save(new_smc,'./ncfiles/soil.moisture.smc.anom.nc')
@@ -179,4 +181,141 @@ def write_blank_anom():
     writebin(zonal_wind,'./orig_input/zonal.wind.anom')
     writebin(soil_moisture,'./orig_input/soil.moisture.anom')
     writebin(cloud_cover,'./orig_input/cloud.cover.anom')
+
+def write_v_4ycomp(p_m="pos"):
+    """
+    Reads in netcdf files of meridional wind and anomalous winds
+    add anomalies to input files
+    p_m = "pos" or "neg" for positive or negative anomaly
+    writes out nc and bin files
+    """
+
+    mer_wind = iris.load_cube('./ncfiles/meridional.wind.nc')
+    anom_v = iris.load_cube('./ncfiles/v_850_companom_max.nc')
+    print 'meridional.wind and anomalous wind loaded'
+
+    anom_v.standard_name = mer_wind.standard_name
+    anom_v.units = mer_wind.units
+    # Remove 'coord system' for regridding to work
+    anom_v.coord('latitude').coord_system = None
+    anom_v.coord('longitude').coord_system = None
+
+    # Rearrange order of coords
+#     mer_wind.transpose([2,0,1])
+    #regrid v anom
+    anom_v = anom_v.regrid(mer_wind[:,:,0],iris.analysis.Linear())
+
+    new_merwind = mer_wind.copy()
+    anom_v_data = np.repeat(np.expand_dims(anom_v.data,2),mer_wind.shape[-1],2)
+    if p_m == "pos":
+        print "Positive anomaly"
+        new_merwind.data = anom_v_data
+    if p_m == "neg":
+        print "Negative anomaly"
+        new_merwind.data = -anom_v_data
+        
+    print 'Writing meridional.wind.4ycomp and meridional.wind.4ycomp.nc and anomalous wind loaded'
+    iris.save(new_merwind,'./ncfiles/meridional.wind.4ycomp.nc')
+    writebin(new_merwind,'./input_files/meridional.wind.4ycomp')
+
+def write_u_4ycomp(p_m="pos"):
+    """
+    Reads in netcdf files of zonal wind and anomalous winds
+    add anomalies to input files
+    p_m = "pos" or "neg" for positive or negative anomaly
+    writes out nc and bin files
+    """
+
+    mer_wind = iris.load_cube('./ncfiles/zonal.wind.nc')
+    anom_u = iris.load_cube('./ncfiles/u_850_companom_max.nc')
+    print 'zonal.wind and anomalous wind loaded'
+
+    anom_u.standard_name = mer_wind.standard_name
+    anom_u.units = mer_wind.units
+    # Remove 'coord system' for regridding to work
+    anom_u.coord('latitude').coord_system = None
+    anom_u.coord('longitude').coord_system = None
+
+    # Rearrange order of coords
+#     mer_wind.transpose([2,0,1])
+    #regrid v anom
+    anom_u = anom_u.regrid(mer_wind[:,:,0],iris.analysis.Linear())
+
+    new_merwind = mer_wind.copy()
+    anom_u_data = np.repeat(np.expand_dims(anom_u.data,2),mer_wind.shape[-1],2)
+    if p_m == "pos":
+        print "Positive anomaly"
+        new_merwind.data = anom_u_data
+    if p_m == "neg":
+        print "Negative anomaly"
+        new_merwind.data = -anom_u_data
+        
+    print 'Writing zonal.wind.anom and zonal.wind.anom.nc and anomalous wind loaded'
+    iris.save(new_merwind,'./ncfiles/zonal.wind.4ycomp.nc')
+    writebin(new_merwind,'./input_files/zonal.wind.4ycomp')
+
+def write_smc_4ycomp(p_n="pos"):
+    """
+    Reads in netcdf files of meridional wind and anomalous winds
+    add anomalies to input files
+    writes out nc and bin files
+    p_n = 'pos' or 'neg' to add or subtract anom
+    """
+    smc = iris.load_cube('./ncfiles/soil.moisture.nc')
+    anom = iris.load_cube('./ncfiles/smc_companom_max.nc')
+    print 'Soil moisture loaded'
+
+    anom = anom.regrid(smc[:,:,0],iris.analysis.Linear())
+    anom.data[(abs(anom.data) >= 1)]  = 0
+    oc_mask = np.ma.masked_greater_equal(smc.data,0.9)
+    oc = (~oc_mask.mask).astype('int')
+    new_smc = smc.copy()
+    anom_data = np.repeat(np.expand_dims(anom.data,2),smc.shape[-1],2)
+    amp_factor = 1 # Amplify signal by x
+    if p_n == "pos":
+        print "Positive anomaly"
+        new_smc.data = anom_data*oc*amp_factor
+    if p_n == "neg":
+        print "Negative anomaly"
+        new_smc.data = -anom_data*oc*amp_factor
+
+    print 'Writing soil.moisture.smc.anom/nc'
+    iris.save(new_smc,'./ncfiles/soil.moisture.smc.4ycomp.nc')
+    writebin(new_smc,'./input_files/soil.moisture.smc.4ycomp')
+
+
+    return  new_smc, anom_data, oc
+
+def write_cld_4ycomp(p_n="pos",height='full'):
+    """
+    Reads in netcdf files of meridional wind and anomalous winds
+    add anomalies to input files
+    writes out nc and bin files
+    p_n = 'pos' or 'neg' to add or subtract anom
+    """
+    cld = iris.load_cube('./ncfiles/cloud.cover.nc')
+    if height == 'low':
+        anom = iris.load_cube('./ncfiles/cld_low_companom_max.nc')
+    if height == 'high':
+        anom = iris.load_cube('./ncfiles/cld_high_companom_max.nc')
+    if height == 'full':
+        anom = iris.load_cube('./ncfiles/cld_full_companom_max.nc')
+    print 'Cloud anom loaded'
+
+    anom = anom.regrid(cld[:,:,0],iris.analysis.Linear())
+    new_cld = cld.copy()
+    anom_data = np.repeat(np.expand_dims(anom.data,2),cld.shape[-1],2)
+    if p_n == "pos":
+        print "Positive anomaly"
+        new_cld.data = anom_data
+    if p_n == "neg":
+        print "Negative anomaly"
+        new_cld.data = -anom_data
+
+    print 'Writing cloud.cover.cld.anom/nc'
+    iris.save(new_cld,'./ncfiles/cloud.cover.cld.4ycomp.nc')
+    writebin(new_cld,'./input_files/cloud.cover.cld.4ycomp')
+
+    return # new_smc
+
 
