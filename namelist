@@ -5,5 +5,5 @@ time_scnr = 50  ! length of scenariorun [yrs
 /
 &PHYSICS
 log_exp = 10 ! complete GREB model; 2xCO2 forcing
-anom = 'smc' ! character(len3) choose anomaly (smc (wind), smc, cld)
+anom = 'ast' ! character(len3) choose anomaly (ast (wind), smc, cld)
 /

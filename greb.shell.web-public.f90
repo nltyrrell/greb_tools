@@ -31,6 +31,7 @@
   open(24,file='meridional.wind.anom',      ACCESS='DIRECT',FORM='UNFORMATTED', RECL=ireal*xdim*ydim)
   open(25,file='soil.moisture.anom',        ACCESS='DIRECT',FORM='UNFORMATTED', RECL=ireal*xdim*ydim)
   open(26,file='cloud.cover.anom',          ACCESS='DIRECT',FORM='UNFORMATTED', RECL=ireal*xdim*ydim)
+  open(27,file='sst.anom',                  ACCESS='DIRECT',FORM='UNFORMATTED', RECL=ireal*xdim*ydim)
 
 ! read namelist 
   read(10,numerics)
@@ -40,20 +41,23 @@
   read(13,rec=1)  z_topo
   read(15,rec=1)  sw_solar
   read(20,rec=1)  glacier
+  read(27,rec=1)  sstanom
 
-  do n=1,nstep_yr
-     read(11,rec=n) tclim(:,:,n)
-     read(12,rec=n) qclim(:,:,n)
-     read(14,rec=n) swetclim(:,:,n)
-     read(16,rec=n) uclim(:,:,n)
-     read(17,rec=n) vclim(:,:,n)
-     read(18,rec=n) mldclim(:,:,n)
-     read(19,rec=n) cldclim(:,:,n)
-     read(23,rec=n) uanom(:,:,n)
-     read(24,rec=n) vanom(:,:,n)
-     read(25,rec=n) swetanom(:,:,n)
-     read(26,rec=n) cldanom(:,:,n)
-  end do
+    do n=1,nstep_yr
+        read(11,rec=n) tclim(:,:,n)
+        read(12,rec=n) qclim(:,:,n)
+        read(14,rec=n) swetclim(:,:,n)
+        read(16,rec=n) uclim(:,:,n)
+        read(17,rec=n) vclim(:,:,n)
+        read(18,rec=n) mldclim(:,:,n)
+        read(19,rec=n) cldclim(:,:,n)
+        read(23,rec=n) uanom(:,:,n)
+        read(24,rec=n) vanom(:,:,n)
+        read(25,rec=n) swetanom(:,:,n)
+        read(26,rec=n) cldanom(:,:,n)
+    end do
+
+! read sst anomaly
 
 ! define deep ocean temp. as min of Tsurf but > 3.0 Celcius
   forall (i=1:xdim, j=1:ydim)

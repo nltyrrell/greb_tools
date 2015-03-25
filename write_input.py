@@ -30,6 +30,7 @@ def writebin(infile_nc,outfile_bin):
     dataflat.tofile(ofile)
     ofile.close()
 
+
 def write_v_anom(p_m="pos"):
     """
     Reads in netcdf files of meridional wind and anomalous winds
@@ -181,6 +182,35 @@ def write_blank_anom():
     writebin(zonal_wind,'./orig_input/zonal.wind.anom')
     writebin(soil_moisture,'./orig_input/soil.moisture.anom')
     writebin(cloud_cover,'./orig_input/cloud.cover.anom')
+
+def write_sst_4ycomp(p_m="pos"):
+    """
+    Reads in netcdf files of meridional wind and anomalous winds
+    add anomalies to input files
+    p_m = "pos" or "neg" for positive or negative anomaly
+    writes out nc and bin files
+    """
+
+    tsurf = iris.load_cube('./ncfiles/tsurf.nc')
+    sst_anom = iris.load_cube('./ncfiles/pacific.pos.anom.nc')
+    print 'pacific sst anom loaded'
+
+#     anom_v.standard_name = mer_wind.standard_name
+#     anom_v.units = mer_wind.units
+    # Remove 'coord system' for regridding to work
+    #regrid v anom
+    sst_anom = sst_anom.regrid(tsurf[:,:,0],iris.analysis.Linear())
+
+#     if p_m == "pos":
+#         print "Positive anomaly"
+#         new_merwind.data = anom_v_data
+#     if p_m == "neg":
+#         print "Negative anomaly"
+#         new_merwind.data = -anom_v_data
+        
+    print 'Writing meridional.wind.anom and meridional.wind.anom.nc and anomalous wind loaded'
+    iris.save(sst_anom,'./ncfiles/sst.anom.nc')
+    writebin(sst_anom,'./input_files/sst.anom')
 
 def write_v_4ycomp(p_m="pos"):
     """
