@@ -307,7 +307,20 @@ subroutine greb_model
         ! sens. exp. SST+1
         if(log_exp >= 14 .and. log_exp <= 16) CO2 = CO2_ctrl
         if(log_exp >= 14 .and. log_exp <= 16) where (z_topo < 0.0) Ts1 = Tclim(:,:,ityr)+1.0 
-!         if (log_exp >= 14 .and. log_exp <= 16) where (z_topo < 0.0) Ts1 = Tclim(:,:,ityr)+1.0 
+        if ((anom == 'sst').or.(anom == 'ast')) then
+            if ((ityr == 1).and.(year == 1940)) print *,'SST anomaly added to Tclim'
+            where (z_topo < 0.0) Ts1  = Tclim(:,:,ityr) + sstanom
+        else if (anom ==  'oscsst') then
+            if ((ityr == 1).and.(year == 1940)) print *,'oscillating ENSO SST anomaly'
+            factor = 0.003
+            sinfactor = sin(2*pi*it/(730*4))
+            TF_anom(:,:,ityr) = sinfactor*factor*sstanom*cap_surf/dt  ! heat flux in [W/m^2]
+            Ts0  = Ts1  +dT_ocean +dt*( SW +LW_surf -LWair_down +Q_lat +Q_sens +TF_anom(:,:,ityr)+ TF_correct(:,:,ityr)) / cap_surf
+        else 
+        if ((ityr == 1).and.(year == 1940)) print *, 'No SST anomaly'
+  ! surface temperature
+        Ts0  = Ts1  +dT_ocean +dt*( SW +LW_surf -LWair_down +Q_lat +Q_sens +TF_correct(:,:,ityr)) / cap_surf 
+    end if
 
         call time_loop(it,isrec, year, CO2, irec, mon, 22, Ts1, Ta1, q1, To1, Ts0,Ta0, q0, To0 ) 
         Ts1=Ts0; Ta1=Ta0; q1=q0; To1=To0      
@@ -340,23 +353,9 @@ subroutine time_loop(it, isrec, year, CO2, irec, mon, ionum, Ts1, Ta1, q1, To1, 
   call tendencies(CO2, Ts1, Ta1, To1, q1, albedo, SW, LW_surf, Q_lat,   &
 &                    Q_sens, Q_lat_air, dq_eva, dq_rain, dq_crcl,       &
 &                    dTa_crcl, dT_ocean, dTo, LWair_down, LWair_up, em)
-    if ((anom == 'sst').or.(anom == 'ast')) then
-        if ((ityr == 1).and.(year == 1940)) print *,'ENSO SST anomaly'
-        factor = 0.003
-        TF_anom(:,:,ityr) = factor*sstanom*cap_surf/dt  ! heat flux in [W/m^2]
-        Ts0  = Ts1  +dT_ocean +dt*( SW +LW_surf -LWair_down +Q_lat +Q_sens +TF_anom(:,:,ityr)+ TF_correct(:,:,ityr)) / cap_surf
-    else if (anom ==  'oscsst') then
-        if ((ityr == 1).and.(year == 1940)) print *,'oscillating ENSO SST anomaly'
-        factor = 0.003
-        sinfactor = sin(2*pi*it/(730*4))
-        TF_anom(:,:,ityr) = sinfactor*factor*sstanom*cap_surf/dt  ! heat flux in [W/m^2]
-        Ts0  = Ts1  +dT_ocean +dt*( SW +LW_surf -LWair_down +Q_lat +Q_sens +TF_anom(:,:,ityr)+ TF_correct(:,:,ityr)) / cap_surf
-    else 
-        if ((ityr == 1).and.(year == 1940)) print *, 'No SST anomaly'
-  ! surface temperature
-        Ts0  = Ts1  +dT_ocean +dt*( SW +LW_surf -LWair_down +Q_lat +Q_sens +TF_correct(:,:,ityr)) / cap_surf 
-    end if
 
+  ! surface temperature
+  Ts0  = Ts1  +dT_ocean +dt*( SW +LW_surf -LWair_down +Q_lat +Q_sens +TF_correct(:,:,ityr)) / cap_surf 
   ! air temperature
   Ta0  = Ta1 +dTa_crcl +dt*( LWair_up +LWair_down -em*LW_surf +Q_lat_air -Q_sens )/cap_air
   ! deep ocean temperature

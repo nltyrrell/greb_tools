@@ -192,14 +192,12 @@ def write_sst_4ycomp(p_m="pos"):
     """
 
     tsurf = iris.load_cube('./ncfiles/tsurf.nc')
-    sst_anom = iris.load_cube('./ncfiles/pacific.pos.anom.nc')
-    print 'pacific sst anom loaded'
+    sst_anom = iris.load_cube('./ncfiles/sst_companom_max.nc')
+    lsmask = iris.load_cube('./ncfiles/land_sea_1_mask.nc')
+    print 'sst anom loaded'
 
-#     anom_v.standard_name = mer_wind.standard_name
-#     anom_v.units = mer_wind.units
-    # Remove 'coord system' for regridding to work
-    #regrid v anom
     sst_anom = sst_anom.regrid(tsurf[:,:,0],iris.analysis.Linear())
+    sst_anom = sst_anom * lsmask
 
 #     if p_m == "pos":
 #         print "Positive anomaly"
@@ -211,6 +209,7 @@ def write_sst_4ycomp(p_m="pos"):
     print 'Writing meridional.wind.anom and meridional.wind.anom.nc and anomalous wind loaded'
     iris.save(sst_anom,'./ncfiles/sst.anom.nc')
     writebin(sst_anom,'./input_files/sst.anom')
+    return 
 
 def write_v_4ycomp(p_m="pos"):
     """
